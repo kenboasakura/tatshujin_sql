@@ -1,0 +1,17 @@
+SELECT
+	key_number
+	
+FROM
+	Greatests
+ORDER BY CASE key_number
+		/*1番目に表示*/
+		WHEN 'B' THEN 1
+		/*2番目に表示*/
+		WHEN 'A' THEN 2
+		/*3番目に表示*/
+		WHEN 'D' THEN 3
+		/*4番目に表示*/
+		WHEN 'C' THEN 4
+		ELSE NULL
+	END
+;

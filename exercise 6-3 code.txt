@@ -1,0 +1,18 @@
+SELECT
+	SI.shop,
+	COUNT(SI.item) AS my_item_cnt,
+	(
+		SELECT
+			COUNT(item)
+		FROM
+			items
+			) - COUNT(SI.item) AS diff_cnt
+FROM
+	shopitems AS SI
+INNER JOIN
+	items I
+ON
+	SI.item = I.item
+GROUP BY
+	SI.shop
+;

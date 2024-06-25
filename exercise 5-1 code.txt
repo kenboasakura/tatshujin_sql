@@ -1,0 +1,35 @@
+回答1
+SELECT DISTINCT
+	*
+FROM
+	arraytbl2 at1
+WHERE
+	EXISTS
+	(
+		SELECT
+			*
+		FROM
+			arraytbl2 at2
+		WHERE
+			at1.key_number = at2.key_number
+		AND
+			/*valの数値*/
+			at2.val = 1
+	)
+;
+
+回答2
+SELECT DISTINCT
+	at1.*
+FROM
+	arraytbl2 AS at1
+INNER JOIN
+	arraytbl2 AS at2
+ON
+	at1.key_number = at2.key_number
+WHERE
+		at1.key_number = at2.key_number
+	AND
+		/*valの数値*/
+		at1.val = 1
+;

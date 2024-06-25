@@ -1,0 +1,18 @@
+SELECT
+	*
+FROM
+	projects p1
+WHERE
+	step_nbr < ALL(
+		SELECT
+			status
+		FROM
+			projects p2
+		WHERE
+			p1.project_id = p2.project_id
+		AND
+			status <> CASE
+				/*行程番号*/
+				WHEN step_nbr <= 1 THEN '完了'
+				ELSE '待機' END)
+;

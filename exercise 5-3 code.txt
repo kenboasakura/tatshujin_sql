@@ -1,0 +1,22 @@
+SELECT
+	d1.num
+FROM
+	digits AS d1
+WHERE
+	d1.num > 1
+AND
+	0 <> ALL(
+		SELECT
+			MOD(d2.num,d3.num)
+		FROM
+			digits AS d2
+		CROSS JOIN
+			digits AS d3
+		ON
+			d2.num > d3.num
+		WHERE
+			d1.num = d2.num
+		AND
+			d3.num > 1
+	)
+;

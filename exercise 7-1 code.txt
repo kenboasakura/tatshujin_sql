@@ -1,0 +1,26 @@
+SELECT
+	a1.prc_date,
+	a1.prc_amt,
+	(
+		SELECT
+			AVG(prc_amt)
+		FROM
+			accounts AS a2
+		WHERE
+			a1.prc_date >= a2.prc_date
+		AND
+			(
+				SELECT
+					COUNT(a3.prc_date)
+				FROM
+					accounts AS a3
+				WHERE
+					a3.prc_date BETWEEN a2.prc_date AND a1.prc_date
+			/*比較する3行*/
+			)<=3
+	) AS 'AVG(prc_amt)'
+FROM
+	accounts AS a1
+ORDER BY
+	prc_date ASC
+;

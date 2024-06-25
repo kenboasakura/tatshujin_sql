@@ -1,0 +1,23 @@
+・COALESCE関数
+指定したカラムがNULLだった場合にNULL値を指定した別の値に置換する関数である。
+
+SELECT
+	id,
+	name,
+	price,
+	/*NULL値を0個に置き換える*/
+	COARESCE(quantity,0) AS quantity
+FROM
+	purshase
+;
+上記のように()の中に列名と置換したい値の順で入力。
+この場合、「quantityの値がNULLだった場合に0に置換する」といった意味をもつ
+
+・NULLIF関数
+引数を比較して、同値の場合にNULLを返却し、そうでない場合に1つめの引数を返却する関数
+
+SELECT
+	NULLIF(引数1,引数2)
+
+上記のように引数1と2を比較し同値ならNULLを、そうでないなら引数1の値を返却
+

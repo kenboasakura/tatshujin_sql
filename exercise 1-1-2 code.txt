@@ -1,0 +1,10 @@
+SELECT
+	key_number,
+	CASE
+		WHEN x > y THEN x
+		WHEN y > z THEN y
+		ELSE z 
+	END AS greatests
+FROM
+	Greatests
+;

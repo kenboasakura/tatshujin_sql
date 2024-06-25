@@ -1,0 +1,41 @@
+
+DELETE 
+	T
+FROM
+(
+	SELECT
+		*,
+		id = ROW_NUMBER()OVER(PARTITION BY name
+		ORDER BY(SELECT
+					NULL)
+		)
+	FROM
+		original_products
+) AS T
+WHERE 
+	id > 1
+;
+
+DELETE
+	op1
+FROM
+	original_products AS op1
+INNER JOIN
+	(
+		SELECT
+			name,
+			ROW_NUMBER()OVER(PARTITION BY price
+			)AS id
+		FROM
+			copy_products
+	)AS op2
+ON
+	op1.name = op2.name
+WHERE op2.id > 2
+;
+
+SELECT
+*
+FROM
+original_products
+;
