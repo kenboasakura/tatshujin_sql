@@ -1,22 +1,73 @@
+CREATE TABLE
+	digits
+	(
+		digit INTEGER PRIMARY KEY
+	)
+; 
+
+INSERT INTO
+	digits 
+VALUES
+	/*連番の番号0*/
+	(0),
+	/*連番の番号1*/
+	(1),
+	/*連番の番号2*/
+	(2),
+	/*連番の番号3*/
+	(3),
+	/*連番の番号4*/
+	(4),
+	/*連番の番号5*/
+	(5),
+	/*連番の番号6*/
+	(6),
+	/*連番の番号7*/
+	(7),
+	/*連番の番号8*/
+	(8),
+	/*連番の番号9*/
+	(9)
+;
+
+CREATE VIEW
+	numbers (number) AS
 SELECT
-	d1.num
+	/*連番を999まで作るためにかけられる整数*/
+	first_digits.digit  + (second_digits.digit * 10) + (third_digits.digit * 100)
 FROM
-	digits AS d1
+	digits AS first_digits
+CROSS JOIN
+	digits AS second_digits
+CROSS JOIN
+	digits AS third_digits
+;
+
+SELECT DISTINCT
+	first_numbers.number
+FROM
+	numbers AS first_numbers
 WHERE
-	d1.num > 1
+	/*1より大きい番号*/
+	first_numbers.number > 1
 AND
+	/*100以下の番号*/
+	first_numbers.number <= 100 
+AND
+	/*0以外の整数すべて*/
 	0 <> ALL(
 		SELECT
-			MOD(d2.num,d3.num)
+			MOD(second_numbers.number,third_numbers.number)
 		FROM
-			digits AS d2
+			numbers AS second_numbers
 		CROSS JOIN
-			digits AS d3
+			numbers AS third_numbers
 		ON
-			d2.num > d3.num
+			second_numbers.number > third_numbers.number
 		WHERE
-			d1.num = d2.num
+			first_numbers.number = second_numbers.number
 		AND
-			d3.num > 1
+			/*1より大きい整数*/
+			third_numbers.number > 1
 	)
 ;

@@ -1,18 +1,59 @@
+CREATE TABLE
+	Projects
+	(
+		project_id VARCHAR(32),
+		step_number INTEGER ,
+		status VARCHAR(32),
+		PRIMARY KEY(project_id, step_number)
+	)
+;
+
+INSERT INTO 
+	Projects
+VALUES
+	/*行程番号*/
+	('AA100', 0, '完了'),
+	/*行程番号*/
+	('AA100', 1, '待機'),
+	/*行程番号*/
+	('AA100', 2, '待機'),
+	/*行程番号*/
+	('B200',  0, '待機'),
+	/*行程番号*/
+	('B200',  1, '待機'),
+	/*行程番号*/
+	('CS300', 0, '完了'),
+	/*行程番号*/
+	('CS300', 1, '完了'),
+	/*行程番号*/
+	('CS300', 2, '待機'),
+	/*行程番号*/
+	('CS300', 3, '待機'),
+	/*行程番号*/
+	('DY400', 0, '完了'),
+	/*行程番号*/
+	('DY400', 1, '完了'),
+	/*行程番号*/
+	('DY400', 2, '完了')
+;
+
 SELECT
 	*
 FROM
-	projects p1
+	projects AS first_projects
 WHERE
-	step_nbr < ALL(
-		SELECT
-			status
-		FROM
-			projects p2
-		WHERE
-			p1.project_id = p2.project_id
-		AND
-			status <> CASE
-				/*行程番号*/
-				WHEN step_nbr <= 1 THEN '完了'
-				ELSE '待機' END)
+	step_number < ALL(
+			SELECT
+				status
+			FROM
+				projects AS second_projects
+			WHERE
+				first_projects.project_id = second_projects.project_id
+			AND
+				status <>
+					CASE
+					/*行程番号*/
+					WHEN step_number <= 1 THEN '完了'
+					ELSE '待機' END
+		)
 ;
