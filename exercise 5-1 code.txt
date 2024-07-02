@@ -1,35 +1,35 @@
-回答1
+/*オール1のエンティティを選択する(EXISTS版)*/
 SELECT DISTINCT
-	*
+	first_array_tables.key_number
 FROM
-	arraytbl2 at1
+	array_tables AS first_array_tables
 WHERE
 	EXISTS
 	(
 		SELECT
 			*
 		FROM
-			arraytbl2 at2
+			array_tables AS second_array_tables
 		WHERE
-			at1.key_number = at2.key_number
+			first_array_tables.key_number = second_array_tables.key_number
 		AND
-			/*valの数値*/
-			at2.val = 1
+			/*valueの数値*/
+			second_array_tables.value = 1
 	)
 ;
 
-回答2
+/*オール1のエンティティを選択する(別解版)*/
 SELECT DISTINCT
-	at1.*
+	first_array_tables.key_number
 FROM
-	arraytbl2 AS at1
+	array_tables AS first_array_tables
 INNER JOIN
-	arraytbl2 AS at2
+	array_tables AS second_array_tables
 ON
-	at1.key_number = at2.key_number
+	first_array_tables.key_number = second_array_tables.key_number
 WHERE
-		at1.key_number = at2.key_number
+		first_array_tables.key_number = second_array_tables.key_number
 	AND
-		/*valの数値*/
-		at1.val = 1
+		/*valueの数値*/
+		first_array_tables.value = 1
 ;

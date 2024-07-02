@@ -1,7 +1,21 @@
+・歯抜けありバージョンテーブルに対するクエリ
+/*連番に歯抜けがある場合には歯抜けあり、ないなら歯抜けなしと返すクエリ*/
 SELECT
-	CASE
-	WHEN COUNT(*) <> MAX(seq) THEN '歯抜けあり'
-	ELSE '歯抜けなし' END AS gap
+	CASE COUNT(*) 
+		WHEN COUNT(*) <> MAX(sequence) THEN '歯抜けあり'
+		ELSE '歯抜けなし' 
+	END AS gap
 FROM
-	seqtbl
+	sequence_tables
+;
+
+・歯抜けなしバージョンテーブルに対するクエリ
+/*連番に歯抜けがある場合には歯抜けあり、ないなら歯抜けなしと返すクエリ*/
+SELECT
+	CASE COUNT(*) 
+		WHEN COUNT(*) <> MAX(sequence) THEN '歯抜けあり'
+		ELSE '歯抜けなし' 
+	END AS gap
+FROM
+	second_sequence_tables
 ;

@@ -1,0 +1,90 @@
+演習6-1
+・歯抜けあり
+/*番号ごとに名前を割り振ったテーブルの削除*/
+DROP TABLE
+IF EXISTS
+	sequence_tables
+;
+
+/*番号ごとに名前を割り振ったテーブルの作成*/
+CREATE TABLE
+IF NOT EXISTS
+	sequence_tables
+	(
+		sequence  INTEGER PRIMARY KEY,
+		name VARCHAR(16) NOT NULL
+	)
+;
+
+/*番号ごとに名前を割り振ったテーブルに値を挿入*/
+INSERT INTO
+	sequence_tables
+VALUES
+	(1,'ディック'),
+	(2,'アン'),
+	(3,'ライル'),
+	(5,'カー'),
+	(6,'マリー'),
+	(8,'ベン')
+;
+・歯抜けなし
+/*番号ごとに名前を割り振ったテーブルの削除*/
+DROP TABLE
+IF EXISTS
+	second_sequence_tables
+;
+
+/*番号ごとに名前を割り振ったテーブルの作成*/
+CREATE TABLE
+IF NOT EXISTS
+	second_sequence_tables
+	(
+		sequence  INTEGER PRIMARY KEY,
+		name VARCHAR(16) NOT NULL
+	)
+;
+
+/*番号ごとに名前を割り振ったテーブルに値を挿入*/
+INSERT IGNORE INTO
+	second_sequence_tables
+VALUES
+	(1,'ディック'),
+	(2,'アン'),
+	(3,'ライル'),
+	(4,'A'),
+	(5,'カー'),
+	(6,'マリー'),
+	(7,'A'),
+	(8,'ベン')
+;
+
+演習6-2
+/*学生のレポートの提出日を管理するテーブルの削除*/
+DROP TABLE
+IF EXISTS
+	students
+;
+
+/*学生のレポートの提出日を管理するテーブルの作成*/
+CREATE TABLE
+IF NOT EXISTS
+	students
+	(
+		student_id INTEGER PRIMARY KEY,
+		faculty VARCHAR(16) NOT NULL,
+		submission_date DATE
+	)
+;
+
+/*学生のレポートの提出日を管理するテーブルに値を挿入*/
+INSERT IGNORE INTO
+	students
+VALUES
+	(100,  '理学部',   '2018-10-10'),
+	(101,  '理学部',   '2018-09-22'),
+	(102,  '文学部',   NULL),
+	(103,  '文学部',   '2018-09-10'),
+	(200,  '文学部',   '2018-09-22'),
+	(201,  '工学部',   NULL),
+	(202,  '経済学部', '2018-09-25')
+;

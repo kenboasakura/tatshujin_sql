@@ -1,11 +1,17 @@
+/*全員が9月中に提出済みの学部を選択するクエリ*/
 SELECT
-	dpt
+	faculty
 FROM
 	students
 GROUP BY
-	dpt
+	faculty
 HAVING
-	COUNT(*) = SUM(CASE
-	WHEN sbmt_date < '2018-10-01' THEN 1
-	ELSE 0 END)
+	COUNT(*) = SUM(
+		CASE 
+			/*提出されたかをカウントする数*/
+			WHEN submission_date BETWEEN '2018-09-01' AND '2018-09-31' THEN 1
+			/*提出されたかをカウントする数*/
+			ELSE 0
+		END
+	)
 ;
