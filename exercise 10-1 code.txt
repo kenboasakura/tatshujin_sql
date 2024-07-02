@@ -1,0 +1,37 @@
+SELECT DISTINCT
+	s1.sequence_id
+FROM
+	sequence AS s1
+CROSS JOIN
+	second_sequence_tables AS st1
+WHERE
+	/*1から12の連番の範囲*/
+	s1.sequence_id BETWEEN 1 AND 12
+AND
+	NOT EXISTS
+		(
+			SELECT
+				*
+			FROM
+				second_sequence_tables AS st2
+			WHERE
+				s1.sequence_id = st2.sequence_id
+			AND
+				st2.sequence_id = st2.sequence_id
+		)
+;
+
+SELECT
+	s.sequence_id
+FROM
+	sequence AS s
+LEFT OUTER JOIN
+	second_sequence_tables AS st
+ON
+	s.sequence_id = st.sequence_id
+WHERE
+	/*1から12の連番の範囲*/
+	s.sequence_id BETWEEN 1 AND 12
+AND
+	st.sequence_id IS NULL
+;

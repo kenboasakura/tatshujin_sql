@@ -1,0 +1,30 @@
+SELECT
+	CASE
+	WHEN
+	(
+		SELECT
+			COUNT(*)
+		FROM
+			tbl_A
+	)=
+	(
+		SELECT
+			COUNT(*)
+		FROM
+			tbl_B
+	)THEN COUNT(*)
+	ELSE '等しくありません'
+	END AS row_number
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A AS ta
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B AS tb
+	)TMP
+;

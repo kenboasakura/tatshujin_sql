@@ -1,0 +1,26 @@
+SELECT
+	employee,
+	COUNT(child)
+FROM
+	(
+		SELECT
+			employee,
+			child_1 AS child
+		FROM
+			personnel
+		UNION ALL
+		SELECT
+			employee,
+			child_2 AS child
+		FROM
+			personnel
+		UNION ALL
+		SELECT
+			employee,
+			child_3 AS child
+		FROM
+			personnel
+	)AS children
+GROUP BY
+	employee
+;

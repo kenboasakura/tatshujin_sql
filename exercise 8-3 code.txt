@@ -1,0 +1,11 @@
+INSERT INTO
+	classA(id,name)
+SELECT
+	cb.id,
+	cb.name
+FROM
+	classB AS cb
+ON DUPLICATE KEY UPDATE
+	id = cb.id,
+	name = cb.name
+;

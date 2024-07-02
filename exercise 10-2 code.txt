@@ -1,0 +1,156 @@
+・折り返しなし
+CREATE TABLE
+	seats
+	(
+		seat INT(7) NOT NULL PRIMARY KEY,
+		status CHAR(5) DEFAULT '空' NOT NULL
+		
+	)
+;
+
+INSERT INTO
+	seats
+	(
+	seat,
+	status
+	)
+VALUES
+	/*座席番号が1である*/
+	(1,'占'),
+	/*座席番号が2である*/
+	(2,'占'),
+	/*座席番号が3である*/
+	(3,'空'),
+	/*座席番号が4である*/
+	(4,'空'),
+	/*座席番号が5である*/
+	(5,'空'),
+	/*座席番号が6である*/
+	(6,'占'),
+	/*座席番号が7である*/
+	(7,'空'),
+	/*座席番号が8である*/
+	(8,'空'),
+	/*座席番号が9である*/
+	(9,'空'),
+	/*座席番号が10である*/
+	(10,'空'),
+	/*座席番号が11である*/
+	(11,'空'),
+	/*座席番号が12である*/
+	(12,'占'),
+	/*座席番号が13である*/
+	(13,'占'),
+	/*座席番号が14である*/
+	(14,'空'),
+	/*座席番号が15である*/
+	(15,'空')
+;
+SELECT 
+	s1.seat AS start_seat,
+	'～',
+	s2.seat AS end_seat
+FROM
+	seats AS s1
+INNER JOIN
+	seats AS s2
+ON
+	/*現在行を含む次の3行*/
+	s1.seat + 2 = s2.seat
+INNER JOIN
+	seats AS s3
+ON
+	s3.seat BETWEEN s1.seat AND s2.seat
+GROUP BY
+	s1.seat,
+	s2.seat
+HAVING
+	COUNT(*) = SUM(
+		CASE
+		/*空であれば行数をカウント*/
+		WHEN s3.status = '空' THEN 1
+		/*そうでなければカウントしない*/
+		ELSE 0 END)
+;
+
+
+CREATE TABLE
+	second_seats
+	(
+		seat INT(7) NOT NULL PRIMARY KEY,
+		line_id CHAR(5) NOT NULL,
+		status CHAR(5) DEFAULT '空' NOT NULL
+		
+	)
+;
+
+INSERT INTO
+	second_seats
+	(
+	seat,
+	line_id,
+	status
+	)
+VALUES
+	/*座席番号が1である*/
+	(1,'A','占'),
+	/*座席番号が2である*/
+	(2,'A','占'),
+	/*座席番号が3である*/
+	(3,'A','空'),
+	/*座席番号が4である*/
+	(4,'A','空'),
+	/*座席番号が5である*/
+	(5,'A','空'),
+	/*座席番号が6である*/
+	(6,'B','占'),
+	/*座席番号が7である*/
+	(7,'B','空'),
+	/*座席番号が8である*/
+	(8,'B','空'),
+	/*座席番号が9である*/
+	(9,'B','空'),
+	/*座席番号が10である*/
+	(10,'B','空'),
+	/*座席番号が11である*/
+	(11,'C','空'),
+	/*座席番号が12である*/
+	(12,'C','占'),
+	/*座席番号が13である*/
+	(13,'C','占'),
+	/*座席番号が14である*/
+	(14,'C','空'),
+	/*座席番号が15である*/
+	(15,'C','空')
+;
+
+SELECT 
+	s1.seat AS start_seat,
+	'～',
+	s2.seat AS end_seat
+FROM
+	second_seats AS s1
+INNER JOIN
+	second_seats AS s2
+ON
+	/*現在行を含む次の3行*/
+	s1.seat + 2 = s2.seat
+INNER JOIN
+	second_seats AS s3
+ON
+	s3.seat BETWEEN s1.seat AND s2.seat
+GROUP BY
+	s1.seat,
+	s2.seat
+HAVING
+	COUNT(*) = SUM(
+		CASE
+		WHEN s3.status = '空'
+		AND
+			s3.line_id = s1.line_id
+		AND
+			/*空であり、行IDが同じであれば行数をカウント*/
+			s3.line_id = s2.line_id THEN 1
+			/*そうでなければカウントしない*/
+		ELSE 0 END)
+;
