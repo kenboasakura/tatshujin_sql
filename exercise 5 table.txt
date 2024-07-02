@@ -1,0 +1,97 @@
+・演習5-2
+DROP TABLE
+	projects
+;
+
+CREATE TABLE
+	projects
+	(
+		project_id VARCHAR(32),
+		step_number INTEGER ,
+		status VARCHAR(32),
+		PRIMARY KEY(project_id, step_number)
+	)
+;
+
+INSERT INTO 
+	projects
+VALUES
+	/*行程番号*/
+	('AA100', 0, '完了'),
+	/*行程番号*/
+	('AA100', 1, '待機'),
+	/*行程番号*/
+	('AA100', 2, '待機'),
+	/*行程番号*/
+	('B200',  0, '待機'),
+	/*行程番号*/
+	('B200',  1, '待機'),
+	/*行程番号*/
+	('CS300', 0, '完了'),
+	/*行程番号*/
+	('CS300', 1, '完了'),
+	/*行程番号*/
+	('CS300', 2, '待機'),
+	/*行程番号*/
+	('CS300', 3, '待機'),
+	/*行程番号*/
+	('DY400', 0, '完了'),
+	/*行程番号*/
+	('DY400', 1, '完了'),
+	/*行程番号*/
+	('DY400', 2, '完了')
+;
+
+・演習5-3
+DROP TABLE
+	digits
+;
+
+DROP VIEW
+	numbers
+;
+
+CREATE TABLE
+	digits
+	(
+		digit INTEGER PRIMARY KEY
+	)
+; 
+
+INSERT INTO
+	digits 
+VALUES
+	/*連番の番号0*/
+	(0),
+	/*連番の番号1*/
+	(1),
+	/*連番の番号2*/
+	(2),
+	/*連番の番号3*/
+	(3),
+	/*連番の番号4*/
+	(4),
+	/*連番の番号5*/
+	(5),
+	/*連番の番号6*/
+	(6),
+	/*連番の番号7*/
+	(7),
+	/*連番の番号8*/
+	(8),
+	/*連番の番号9*/
+	(9)
+;
+
+CREATE VIEW
+	numbers (number) AS
+SELECT
+	/*連番を999まで作るためにかけられる整数*/
+	first_digits.digit  + (second_digits.digit * 10) + (third_digits.digit * 100)
+FROM
+	digits AS first_digits
+CROSS JOIN
+	digits AS second_digits
+CROSS JOIN
+	digits AS third_digits
+;
