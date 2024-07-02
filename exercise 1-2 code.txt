@@ -1,88 +1,149 @@
+CREATE TABLE
+	second_population_table
+	(
+		prefecture_name VARCHAR(32),
+		sex CHAR(1) NOT NULL,
+		population INTEGER NOT NULL,
+		PRIMARY KEY(prefecture_name, sex)
+	)
+;
+
+INSERT INTO
+	second_population_table
+VALUES
+	/*徳島の男性の人口*/
+	('徳島', '1',	60 ),
+	/*徳島の女性の人口*/
+	('徳島', '2',	40 ),
+	/*香川の男性の人口*/
+	('香川', '1',	100),
+	/*香川の女性の人口*/
+	('香川', '2',	100),
+	/*愛媛の男性の人口*/
+	('愛媛', '1',	100),
+	/*愛媛の女性の人口*/
+	('愛媛', '2',	50 ),
+	/*高知の男性の人口*/
+	('高知', '1',	100),
+	/*高知の女性の人口*/
+	('高知', '2',	100),
+	/*福岡の男性の人口*/
+	('福岡', '1',	100),
+	/*福岡の女性の人口*/
+	('福岡', '2',	200),
+	/*佐賀の男性の人口*/
+	('佐賀', '1',	20 ),
+	/*佐賀の女性の人口*/
+	('佐賀', '2',	80 ),
+	/*長崎の男性の人口*/
+	('長崎', '1',	125),
+	/*長崎の女性の人口*/
+	('長崎', '2',	125),
+	/*東京の男性の人口*/
+	('東京', '1',	250),
+	/*東京の女性の人口*/
+	('東京', '2',	150)
+;
+
+/*男女別で全国、徳島、香川、愛媛、高知、四国地方の人口を取得*/
 SELECT
-	sex AS 性別,
+	(
+		CASE
+			WHEN sex = '1' THEN '男'
+			WHEN sex = '2' THEN '女'
+			ELSE '不明'
+		END
+	)AS 性別,
 	SUM(
-	CASE
-		WHEN sex = '1' THEN population
-		WHEN sex = '2' THEN population
-		ELSE 0 END
-	 )
-	AS 全国,
+		CASE
+			WHEN sex = '1' THEN population
+			WHEN sex = '2' THEN population
+			/*合計値を0人にする*/
+			ELSE 0
+		END
+	)AS 全国,
 	SUM(
-	CASE
-		WHEN 
-			sex = '1' 
-		AND
-			pref_name = '徳島'
-		THEN population
-		WHEN 
-			sex = '2' 
-		AND
-			pref_name = '徳島'
-		THEN population
-		ELSE 0 END
-	) 
-	AS 徳島,
+		CASE
+			WHEN 
+				sex = '1' 
+			AND
+				prefecture_name = '徳島'
+			THEN population
+			WHEN 
+				sex = '2' 
+			AND
+				prefecture_name = '徳島'
+			THEN population
+			/*合計値を0人にする*/
+			ELSE 0 
+		END
+		) AS 徳島,
 	SUM(
-	CASE
-		WHEN 
-			sex = '1' 
-		AND
-			pref_name = '香川'
-		THEN population
-		WHEN 
-			sex = '2' 
-		AND
-			pref_name = '香川'
-		THEN population
-		ELSE 0 END
-	) 
-	AS 香川,
+		CASE
+			WHEN 
+				sex = '1' 
+			AND
+				prefecture_name = '香川'
+			THEN population
+			WHEN 
+				sex = '2' 
+			AND
+				prefecture_name = '香川'
+			THEN population
+			/*合計値を0人にする*/
+			ELSE 0
+		END
+	) AS 香川,
 	SUM(
-	CASE
-		WHEN 
-			sex = '1' 
-		AND
-			pref_name = '愛媛'
-		THEN population
-		WHEN 
-			sex = '2' 
-		AND
-			pref_name = '愛媛'
-		THEN population
-		ELSE 0 END
-	) 
-	AS 愛媛,
+		CASE
+			WHEN 
+				sex = '1' 
+			AND
+				prefecture_name = '愛媛'
+			THEN population
+			WHEN 
+				sex = '2' 
+			AND
+				prefecture_name = '愛媛'
+			THEN population
+			/*合計値を0人にする*/
+			ELSE 0
+		END
+	) AS 愛媛,
 	SUM(
-	CASE
-		WHEN 
-			sex = '1' 
-		AND
-			pref_name = '高知'
-		THEN population
-		WHEN 
-			sex = '2' 
-		AND
-			pref_name = '高知'
-		THEN population
-		ELSE 0 END
-	) 
-	AS 高知,
+		CASE
+			WHEN 
+				sex = '1' 
+			AND
+				prefecture_name = '高知'
+			THEN population
+			WHEN 
+				sex = '2' 
+			AND
+				prefecture_name = '高知'
+			THEN population
+			/*合計値を0人にする*/
+			ELSE 0 
+		END
+	) AS 高知,
 	SUM(
-	CASE
-		WHEN
-			sex = '1'
-		AND
-			pref_name IN ('徳島','香川','愛媛','高知')
-		THEN population
-		WHEN
-			sex = '2'
-		AND
-			pref_name IN ('徳島','香川','愛媛','高知')
-		THEN population
-		ELSE 0 END
+		CASE
+			WHEN
+				sex = '1'
+			AND
+				prefecture_name IN ('徳島','香川','愛媛','高知')
+			THEN population
+			WHEN
+				sex = '2'
+			AND
+				prefecture_name IN ('徳島','香川','愛媛','高知')
+			THEN population
+			/*合計値を0人にする*/
+			ELSE 0
+		END
 	) AS 四国
 FROM
-	poptbl2
+	second_population_table
 GROUP BY
 	sex
 ;

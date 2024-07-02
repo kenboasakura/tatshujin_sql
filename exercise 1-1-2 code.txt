@@ -1,10 +1,11 @@
+/*アルファベットごとに整数が入っている3つの列の最大値を取得*/
 SELECT
 	key_number,
 	CASE
-		WHEN x > y THEN x
-		WHEN y > z THEN y
-		ELSE z 
+		WHEN first_number > second_number THEN first_number
+		WHEN second_number > third_number THEN second_number
+		ELSE third_number
 	END AS greatests
 FROM
-	Greatests
+	greatests
 ;

@@ -1,9 +1,33 @@
+CREATE TABLE
+	greatests
+	(
+		key_number CHAR(10) PRIMARY KEY,
+		first_number INT(10) NOT NULL,
+		second_number INT(10) NOT NULL,
+		third_number INT(10) NOT NULL
+	)
+;
+
+INSERT INTO
+	greatests
+VALUES
+	/*教本のx,y,z列に入る整数*/
+	('A',1,2,3),
+	/*教本のx,y,z列に入る整数*/
+	('B',5,5,2),
+	/*教本のx,y,z列に入る整数*/
+	('C',4,7,1),
+	/*教本のx,y,z列に入る整数*/
+	('D',3,3,8)
+;
+
+/*B-A-D-Cの順番に表示*/
 SELECT
-	key_number
-	
+	*
 FROM
-	Greatests
-ORDER BY CASE key_number
+	greatests
+ORDER BY
+	CASE key_number
 		/*1番目に表示*/
 		WHEN 'B' THEN 1
 		/*2番目に表示*/
