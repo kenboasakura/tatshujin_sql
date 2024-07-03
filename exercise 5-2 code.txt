@@ -5,18 +5,18 @@ FROM
 	projects AS first_projects
 WHERE
 	step_number < ALL(
-			SELECT
-				status
-			FROM
-				projects AS second_projects
-			WHERE
-				first_projects.project_code = second_projects.project_code
-			AND
-				status <>
-					CASE
-						/*行程番号*/
-						WHEN step_number <= 1 THEN '完了'
-						ELSE '待機'
-					END
-		)
+		SELECT
+			status
+		FROM
+			projects AS second_projects
+		WHERE
+			first_projects.project_code = second_projects.project_code
+		AND
+			status <>
+				CASE 
+					/*行程番号が1以下の場合*/
+					WHEN  step_number <= 1 THEN '完了'
+					ELSE '待機'
+				END
+	)
 ;
