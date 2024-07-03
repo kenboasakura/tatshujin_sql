@@ -10,12 +10,13 @@ WHERE
 			FROM
 				projects AS second_projects
 			WHERE
-				first_projects.project_id = second_projects.project_id
+				first_projects.project_code = second_projects.project_code
 			AND
 				status <>
 					CASE
-					/*行程番号*/
-					WHEN step_number <= 1 THEN '完了'
-					ELSE '待機' END
+						/*行程番号*/
+						WHEN step_number <= 1 THEN '完了'
+						ELSE '待機'
+					END
 		)
 ;

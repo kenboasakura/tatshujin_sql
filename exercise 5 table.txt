@@ -1,14 +1,12 @@
 ・演習5-1
 
 /*縦列の疑似配列テーブルの削除*/
-DROP TABLE
-IF EXISTS
+DROP TABLE IF EXISTS
 	array_tables
 ;
 
 /*縦列の疑似配列テーブルの作成*/
 CREATE TABLE
-IF NOT EXISTS
 	array_tables
 	(
 		key_number CHAR(1) NOT NULL,
@@ -57,7 +55,7 @@ VALUES
 
 ・演習5-2
 /*プロジェクトの行程番号を管理するテーブルの削除*/
-DROP TABLE
+DROP TABLE IF EXISTS
 	projects
 ;
 
@@ -65,15 +63,15 @@ DROP TABLE
 CREATE TABLE
 	projects
 	(
-		project_id VARCHAR(32),
+		project_code VARCHAR(32),
 		step_number INTEGER ,
 		status VARCHAR(32),
-		PRIMARY KEY(project_id, step_number)
+		PRIMARY KEY(project_code, step_number)
 	)
 ;
 
 /*プロジェクトの行程番号を管理するテーブルに値を挿入*/
-INSERT INTO 
+INSERT IGNORE INTO
 	projects
 VALUES
 	/*行程番号*/
@@ -104,12 +102,12 @@ VALUES
 
 ・演習5-3
 /*0から9までの連番テーブルの削除*/
-DROP TABLE
+DROP TABLE IF EXISTS
 	digits
 ;
 
 /*0から999までの連番ビューの削除*/
-DROP VIEW
+DROP VIEW IF EXISTS
 	numbers
 ;
 
@@ -122,7 +120,7 @@ CREATE TABLE
 ; 
 
 /*0から9までの連番テーブルに値を挿入*/
-INSERT INTO
+INSERT IGNORE INTO
 	digits 
 VALUES
 	/*連番の番号0*/
