@@ -1,0 +1,7 @@
+/*それぞれの住所を県と市、区を組み合わせて表示*/
+SELECT
+	addres_number,
+	CONCAT(prefecture,city)
+FROM
+	addres
+;

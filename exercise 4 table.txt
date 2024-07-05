@@ -1,0 +1,64 @@
+演習4-1、4-3
+/*各個人の名前、年齢、住所を管理するテーブルの削除*/
+DROP TABLE IF EXISTS
+	second_classes
+;
+
+/*各個人の名前、年齢、住所を管理するテーブルの作成*/
+CREATE TABLE
+	second_classes
+	(
+		name CHAR(10) PRIMARY KEY,
+		age INT(5) NULL,
+		city CHAR(10) NOT NULL
+	)
+;
+
+/*各個人の名前、年齢、住所を管理するテーブルに値を挿入*/
+INSERT IGNORE INTO
+	second_classes
+VALUES
+	('斎藤',22,'東京'),
+	('田尻',23,'東京'),
+	('山田',NULL,'東京'),
+	('和泉',18,'千葉'),
+	('武田',20,'千葉'),
+	('石川',19,'神奈川')
+;
+
++-------+------+--------+
+| naame | age  | city   |
++-------+------+--------+
+| 斎藤  |   22 | 東京   |
+| 山田  | NULL | 東京   |
+| 石川  |   19 | 神奈川 |
+| 田尻  |   23 | 東京   |
+| 武田  |   20 | 千葉   |
+| 和泉  |   18 | 千葉   |
++-------+------+--------+
+
+・演習4-2
+/*住所情報を格納したテーブルの削除*/
+DROP TABLE IF EXISTS
+	addres
+;
+
+/*住所情報を格納したテーブルの作成*/
+CREATE TABLE
+	addres
+	(
+		addres_number INT(5) PRIMARY KEY,
+		prefecture CHAR(10) NULL,
+		city CHAR(10) NULL
+	)
+;
+
+/*住所情報を格納したテーブルに値を挿入*/
+INSERT IGNORE INTO
+	addres
+VALUES
+	(1,'東京','千代田区'),
+	(2,'東京',NULL),
+	(3,NULL,NULL)
+;
+

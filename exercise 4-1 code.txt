@@ -1,0 +1,17 @@
+/*各個人の名前、年齢、住所を年齢の若い順に表示*/
+SELECT
+	*
+FROM
+	second_classes
+ORDER BY
+	age ASC
+;
+
+/*各個人の名前、年齢、住所を年上から順に表示*/
+SELECT
+	*
+FROM
+	second_classes
+ORDER BY
+	age DESC
+;
