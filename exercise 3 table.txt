@@ -1,0 +1,48 @@
+・演習3-1
+/*商品とその値段を表すテーブルの削除*/
+DROP TABLE IF EXISTS
+	products
+;
+
+/*商品とその値段を表すテーブルの作成*/
+CREATE TABLE
+	products
+	(
+		name CHAR(10) PRIMARY KEY,
+		price INT NOT NULL
+	)
+;
+/*商品とその値段を表すテーブルに値を挿入*/
+INSERT INTO
+	products
+VALUES
+	('りんご',100),
+	('みかん',50),
+	('バナナ',80)
+;
+
+・演習3-2
+/*商品とその値段を表すテーブルの削除*/
+DROP TABLE IF EXISTS
+	products
+;
+
+/*商品とその値段を表すテーブルの作成*/
+CREATE TABLE
+	products
+	(
+		name CHAR(10) NOT NULL,
+		price INT NOT NULL
+	)
+;
+
+/*商品とその値段を表すテーブルに値を挿入*/
+INSERT INTO
+	products
+VALUES
+	('りんご',50),
+	('みかん',100),
+	('みかん',100),
+	('みかん',100),
+	('バナナ',80)
+;

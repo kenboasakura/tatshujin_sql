@@ -1,26 +1,27 @@
+/*各日にちと前の2回を含む3回の入出金の移動平均を求める*/
 SELECT
-	a1.prc_date,
-	a1.prc_amt,
+	a1.process_date,
+	a1.process_amount,
 	(
 		SELECT
-			AVG(prc_amt)
+			AVG(process_amount)
 		FROM
 			accounts AS a2
 		WHERE
-			a1.prc_date >= a2.prc_date
+			a1.process_date >= a2.process_date
 		AND
 			(
 				SELECT
-					COUNT(a3.prc_date)
+					COUNT(a3.process_date)
 				FROM
 					accounts AS a3
 				WHERE
-					a3.prc_date BETWEEN a2.prc_date AND a1.prc_date
+					a3.process_date BETWEEN a2.process_date AND a1.process_date
 			/*比較する3行*/
 			)<=3
-	) AS 'AVG(prc_amt)'
+	) AS 'AVG(process_amount)'
 FROM
 	accounts AS a1
 ORDER BY
-	prc_date ASC
+	process_date ASC
 ;

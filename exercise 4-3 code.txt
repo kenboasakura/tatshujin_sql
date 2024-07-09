@@ -1,0 +1,23 @@
+・COALESCE関数
+/*各個人の名前、年齢、住所を表示*/
+SELECT
+	name,
+	/*NULL値を0に置き換える*/
+	COALESCE(age,0) AS age,
+	city
+	
+FROM
+	second_classes
+;
+
+・NULLIF関数
+/*各個人の名前、年齢、住所を表示*/
+SELECT
+	name,
+	/*年齢が22才ならNULLと表示*/
+	NULLIF(age,22) AS age,
+	city
+	
+FROM
+	second_classes
+;

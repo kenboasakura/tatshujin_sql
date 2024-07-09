@@ -1,15 +1,37 @@
+/*重複した商品に識別番号を与えた商品とその値段を表すテーブルの削除*/
+DROP TABLE IF EXISTS
+	copy_products
+;
+
+/*重複した商品に識別番号を与えた商品とその値段を表すテーブルの作成*/
+CREATE TABLE
+	copy_products
+	(
+		SELECT
+			name,
+			price,
+			ROW_NUMBER() OVER (PARTITION BY name) AS same_product_number
+		FROM
+			products
+	)
+;
+
+/*重複しているレコードを削除*/
 DELETE FROM
 	copy_products
 WHERE
-	id > 1
+	/*重複した商品のナンバーが1より大きいものを削除*/
+	same_product_number > 1
 ;
 
-DROP TABLE
-	original_products
+/*商品とその値段を表すテーブルの削除*/
+DROP TABLE IF EXISTS
+	products
 ;
 
+/*重複した行を削除した商品とその値段を表すテーブルの作成*/
 CREATE TABLE
-	original_products
+	products
 	(
 		SELECT
 			*
@@ -18,9 +40,16 @@ CREATE TABLE
 	)
 ;
 
+/*重複した商品に識別番号を与えたカラムを削除*/
 ALTER TABLE
-	original_products
+	products
 DROP COLUMN
-	id
+	same_product_number
 ;
 
+/*重複した行を削除した商品とその値段を表すテーブルを表示*/
+SELECT
+	*
+FROM
+	products
+;
