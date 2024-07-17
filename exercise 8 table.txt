@@ -1,0 +1,216 @@
+・演習8-1
+/*年齢階級マスタテーブルの削除*/
+DROP TABLE IF EXISTS
+	age_tables
+;
+
+/*年齢階級マスタテーブルの作成*/
+CREATE TABLE
+	age_tables
+	(
+		age_class INT(10) PRIMARY KEY,
+		age_range CHAR(10) NOT NULL
+	)
+;
+
+/*年齢階級マスタテーブルに値を挿入*/
+INSERT IGNORE INTO
+	age_tables
+VALUES
+	(1,'21～30歳'),
+	(2,'31～40歳'),
+	(3,'41～50歳')
+;
+
+/*性別マスタテーブルの削除*/
+DROP TABLE IF EXISTS
+	sex_tables
+;
+
+/*性別マスタテーブルの作成*/
+CREATE TABLE
+	sex_tables
+	(
+		sex_code CHAR(10) PRIMARY KEY,
+		sex CHAR(10) NOT NULL
+	)
+;
+
+/*性別マスタテーブルに値を挿入*/
+INSERT IGNORE INTO
+	sex_tables
+VALUES
+	('m','男'),
+	('f','女')
+;
+
+/*人口構成テーブルの削除*/
+DROP TABLE IF EXISTS
+	population_tables
+;
+
+/*人口構成テーブルの作成*/
+CREATE TABLE
+	population_tables
+	(
+		prefecture_name CHAR(10),
+		age_class INT(10),
+		sex_code  CHAR(10),
+		population INT(10),
+		PRIMARY KEY(prefecture_name,age_class,sex_code)
+	)
+;
+/*人口構成テーブルに値を挿入*/
+INSERT IGNORE INTO
+	population_tables
+VALUES
+	('秋田',1,'m',400),
+	('秋田',3,'m',1000),
+	('秋田',1,'f',800),
+	('秋田',3,'f',1000),
+	('青森',1,'m',700),
+	('青森',1,'f',500),
+	('青森',3,'f',800),
+	('東京',1,'m',900),
+	('東京',1,'f',1500),
+	('東京',3,'f',1200),
+	('千葉',1,'m',900),
+	('千葉',1,'f',1000),
+	('千葉',3,'f',900)
+;
+
+・演習8-2
+/*社員の子供情報を格納したテーブルの削除*/
+DROP TABLE IF EXISTS
+	personals
+;
+/*社員の子供情報を格納したテーブルの作成*/
+CREATE TABLE
+	personals
+	(
+		employee CHAR(10) PRIMARY KEY,
+		child_one CHAR(10) NULL,
+		child_two CHAR(10) NULL,
+		child_three CHAR(10) NULL
+	)
+;
+/*社員の子供情報を格納したテーブルに値を挿入*/
+INSERT IGNORE INTO
+	personals
+VALUES
+	('赤井','一郎','二郎','三郎'),
+	('工藤','春子','夏子',NULL),
+	('鈴木','夏子',NULL,NULL),
+	('吉田',NULL,NULL,NULL)
+;
+
+/*社員の子供情報を格納したテーブルの削除*/
+DROP TABLE IF EXISTS
+	second_personals
+;
+/*社員の子供情報を格納したテーブルの作成*/
+CREATE TABLE
+	second_personals
+	(
+		employee CHAR(10) NOT NULL,
+		child CHAR(10) NULL
+	)
+;
+/*社員の子供情報を格納したテーブルに値を挿入*/
+INSERT IGNORE INTO
+	second_personals
+VALUES
+	('赤井','一郎'),
+	('赤井','二郎'),
+	('赤井','三郎'),
+	('工藤','春子'),
+	('工藤','夏子'),
+	('鈴木','夏子'),
+	('吉田',NULL)
+;
+
+/*社員の子供リストのビューの削除*/
+DROP VIEW IF EXISTS
+	children
+;
+/*社員の子供リストのビューの作成*/
+CREATE VIEW
+	children(child) AS
+		SELECT
+			child_one
+		FROM
+			personals
+		UNION
+		SELECT
+			child_two
+		FROM
+			personals
+		UNION
+		SELECT
+			child_three
+		FROM
+			personals
+;
+
+・演習8-3
+/*クラス1の生徒情報を格納したテーブルの削除*/
+DROP TABLE IF EXISTS
+	first_classes
+;
+
+/*クラス1の生徒情報を格納したテーブルの作成*/
+CREATE TABLE
+	first_classes
+	(
+		id INT(10) PRIMARY KEY,
+		name CHAR(10) NOT NULL
+	)
+;
+
+/*クラス1の生徒情報を格納したテーブルに値を挿入*/
+INSERT IGNORE INTO
+	first_classes
+VALUES
+	(1,'田中'),
+	(2,'鈴木'),
+	(3,'伊集院')
+;
+
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 田中   |
+|  2 | 鈴木   |
+|  3 | 伊集院 |
++----+--------+
+
+/*クラス2の生徒情報を格納したテーブルの削除*/
+DROP TABLE IF EXISTS
+	second_classes
+;
+
+/*クラス2の生徒情報を格納したテーブルの作成*/
+CREATE TABLE
+	second_classes
+	(
+		id INT(10) PRIMARY KEY,
+		name CHAR(10) NOT NULL
+	)
+;
+
+/*クラス2の生徒情報を格納したテーブルに値を挿入*/
+INSERT IGNORE INTO
+	second_classes
+VALUES
+	(1,'田中'),
+	(2,'内海'),
+	(4,'西園寺')
+;
+
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 田中   |
+|  2 | 内海   |
+|  4 | 西園寺 |
++----+--------+

@@ -1,11 +1,12 @@
+/*2つのクラスをまとめて番号と名前を表示(2クラス目が優先的に表示)*/
 INSERT INTO
-	classA(id,name)
+	first_classes(id,name)
 SELECT
-	cb.id,
-	cb.name
+	sc.id,
+	sc.name
 FROM
-	classB AS cb
+	second_classes AS sc
 ON DUPLICATE KEY UPDATE
-	id = cb.id,
-	name = cb.name
+	id = sc.id,
+	name = sc.name
 ;

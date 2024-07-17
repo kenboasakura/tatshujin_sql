@@ -1,7 +1,8 @@
+/*連番の中のすべての歯抜けを探す(NOT EXISTS版)*/
 SELECT DISTINCT
 	s1.sequence_id
 FROM
-	sequence AS s1
+	sequence_tables AS s1
 CROSS JOIN
 	second_sequence_tables AS st1
 WHERE
@@ -21,10 +22,11 @@ AND
 		)
 ;
 
+/*連番の中のすべての歯抜けを探す(外部結合版)*/
 SELECT
 	s.sequence_id
 FROM
-	sequence AS s
+	sequence_tables AS s
 LEFT OUTER JOIN
 	second_sequence_tables AS st
 ON

@@ -1,26 +1,19 @@
+/*é–àıÇ≤Ç∆ÇÃéqãüÇÃêîÇëΩÇ¢èáÇ…ï\é¶*/
 SELECT
-	employee,
-	COUNT(child)
+	emp.employee,
+	COUNT(children.child)
 FROM
-	(
-		SELECT
-			employee,
-			child_1 AS child
-		FROM
-			personnel
-		UNION ALL
-		SELECT
-			employee,
-			child_2 AS child
-		FROM
-			personnel
-		UNION ALL
-		SELECT
-			employee,
-			child_3 AS child
-		FROM
-			personnel
-	)AS children
+	personals AS emp
+LEFT OUTER JOIN
+	children
+ON
+	children.child IN (
+		emp.child_one,
+		emp.child_two,
+		emp.child_three
+	) 
 GROUP BY
-	employee
+	emp.employee
+ORDER BY
+	COUNT(children.child) DESC
 ;

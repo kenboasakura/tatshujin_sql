@@ -1,30 +1,34 @@
+/*2つのテーブルを比較し、同じなら等しいことを、そうでないなら等しくないことを表す文字列を表示*/
 SELECT
 	CASE
-	WHEN
-	(
-		SELECT
-			COUNT(*)
-		FROM
-			tbl_A
-	)=
-	(
-		SELECT
-			COUNT(*)
-		FROM
-			tbl_B
-	)THEN COUNT(*)
-	ELSE '等しくありません'
+		/*2つのテーブルが同じ場合*/
+		WHEN COUNT(*) = 0 THEN '等しいです'
+		ELSE '等しくありません'
 	END AS row_number
 FROM
 	(
-		SELECT
-			*
-		FROM
-			tbl_A AS ta
-		UNION
-		SELECT
-			*
-		FROM
-			tbl_B AS tb
-	)TMP
+		(
+			SELECT
+				*
+			FROM
+				first_tables AS t1
+			UNION
+			SELECT
+				*
+			FROM
+				second_tables AS t2
+		)
+	EXCEPT
+		(
+			SELECT
+				*
+			FROM
+				first_tables AS t1
+			INTERSECT
+			SELECT
+				*
+			FROM
+				second_tables AS t2
+		)
+	)AS temporary_table
 ;

@@ -1,18 +1,19 @@
+/*全店舗の商品数と足りていない商品数を表示*/
 SELECT
-	SI.shop,
-	COUNT(SI.item) AS my_item_cnt,
+	si.shop,
+	COUNT(si.item) AS my_item_count,
 	(
 		SELECT
 			COUNT(item)
 		FROM
 			items
-			) - COUNT(SI.item) AS diff_cnt
+	) - COUNT(si.item) AS diff_count
 FROM
-	shopitems AS SI
+	shop_items AS si
 INNER JOIN
-	items I
+	items AS i
 ON
-	SI.item = I.item
+	si.item = i.item
 GROUP BY
-	SI.shop
+	si.shop
 ;

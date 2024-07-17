@@ -1,0 +1,132 @@
+・演習9-1
+/*英単語と数字をもつテーブルの削除*/
+DROP TABLE If EXISTS
+	first_tables
+;
+/*英単語と数字をもつテーブルの作成*/
+CREATE TABLE
+	first_tables
+	(
+		key_number CHAR(10) PRIMARY KEY,
+		column_one INT(10) NOT NULL,
+		column_two INT(10) NOT NULL,
+		column_three INT(10) NOT NULL
+	)
+;
+
+/*英単語と数字をもつテーブルに値を挿入*/
+INSERT IGNORE INTO
+	first_tables
+VALUES
+	('A',2,3,4),
+	('B',0,7,9),
+	('C',5,1,6)
+;
+
+/*英単語と数字をもつテーブルの削除*/
+DROP TABLE If EXISTS
+	second_tables
+;
+/*英単語と数字をもつテーブルの作成*/
+CREATE TABLE
+	second_tables
+	(
+		key_number CHAR(10) PRIMARY KEY,
+		column_one INT(10) NOT NULL,
+		column_two INT(10) NOT NULL,
+		column_three INT(10) NOT NULL
+	)
+;
+
+/*英単語と数字をもつテーブルに値を挿入*/
+INSERT IGNORE INTO
+	second_tables
+VALUES
+	('A',2,3,4),
+	('B',0,7,9),
+	('C',5,1,6)
+;
+
+・演習9-2
+/*技術情報を管理するテーブルの削除*/
+DROP TABLE If EXISTS
+	skills
+;
+
+/*技術情報を管理するテーブルの作成*/
+CREATE TABLE
+	skills
+	(
+		skill CHAR(10) PRIMARY KEY
+	)
+;
+/*技術情報を管理するテーブルに値を挿入*/
+INSERT IGNORE INTO
+	skills
+VALUES
+	('Oracle'),
+	('UNIX'),
+	('Java')
+;
+
++--------+
+| skill  |
++--------+
+| Java   |
+| Oracle |
+| UNIX   |
++--------+
+
+/*社員の技術情報を管理するテーブルの削除*/
+DROP TABLE If EXISTS
+	employee_skills
+;
+
+/*社員の技術情報を管理するテーブルの作成*/
+CREATE TABLE
+	employee_skills
+	(
+		employee CHAR(10),
+		skill CHAR(10),
+		PRIMARY KEY(employee,skill)
+	)
+;
+
+/*社員の技術情報を管理するテーブルに値を挿入*/
+INSERT IGNORE INTO
+	employee_skills
+VALUES
+	('相田','Oracle'),
+	('相田','UNIX'),
+	('相田','Java'),
+	('相田','C#'),
+	('神崎','Oracle'),
+	('神崎','UNIX'),
+	('神崎','Java'),
+	('平井','UNIX'),
+	('平井','Oracle'),
+	('平井','PHP'),
+	('平井','Perl'),
+	('平井','C+'),
+	('若田部','Perl'),
+	('渡来','Oracle')
+;
+
++----------+--------+
+| employee | skill  |
++----------+--------+
+| 若田部   | Perl   |
+| 神崎     | Java   |
+| 神崎     | Oracle |
+| 神崎     | UNIX   |
+| 相田     | C#     |
+| 相田     | Java   |
+| 相田     | Oracle |
+| 相田     | UNIX   |
+| 渡来     | Oracle |
+| 平井     | C+     |
+| 平井     | Oracle |
+| 平井     | Perl   |
+| 平井     | PHP    |
+| 平井     | UNIX   |
++----------+--------+

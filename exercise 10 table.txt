@@ -1,0 +1,132 @@
+・演習10-1
+/*欠番のある連番テーブルの削除*/
+DROP TABLE IF EXISTS
+	second_sequence_tables
+;
+/*欠番のある連番テーブルの作成*/
+CREATE TABLE
+	second_sequence_tables
+	(sequence_id INT(10) PRIMARY KEY)
+;
+/*欠番のある連番テーブルに値を挿入*/
+INSERT INTO
+	second_sequence_tables
+VALUES
+	(1),
+	(2),
+	(4),
+	(5),
+	(6),
+	(7),
+	(8),
+	(11),
+	(12)
+;
+
+/*連番テーブルの削除*/
+DROP TABLE IF EXISTS
+	sequence_tables
+;
+/*連番テーブルの作成*/
+CREATE TABLE
+	sequence_tables
+	(sequence_id INT(10) PRIMARY KEY)
+;
+/*連番テーブルに値を挿入*/
+INSERT INTO
+	sequence_tables
+VALUES
+	(1),
+	(2),
+	(3),
+	(4),
+	(5),
+	(6),
+	(7),
+	(8),
+	(9),
+	(10),
+	(11),
+	(12)
+;
+
+・演習10-2
+
+/*折り返しなしの座席情報テーブルの削除*/
+DROP TABLE IF EXISTS
+	seats
+;
+
+/*折り返しなしの座席情報テーブルの作成*/
+CREATE TABLE
+	seats
+	(
+		seat INT(7) NOT NULL PRIMARY KEY,
+		status CHAR(5) DEFAULT '空' NOT NULL
+		
+	)
+;
+/*折り返しなしの座席情報テーブルに値を挿入*/
+INSERT INTO
+	seats
+	(
+	seat,
+	status
+	)
+VALUES
+	(1,'占'),
+	(2,'占'),
+	(3,'空'),
+	(4,'空'),
+	(5,'空'),
+	(6,'占'),
+	(7,'空'),
+	(8,'空'),
+	(9,'空'),
+	(10,'空'),
+	(11,'空'),
+	(12,'占'),
+	(13,'占'),
+	(14,'空'),
+	(15,'空')
+;
+
+/*折り返しなしの座席情報テーブルの削除*/
+DROP TABLE IF EXISTS
+	second_seats
+;
+/*折り返しありの座席情報テーブルの作成*/
+CREATE TABLE
+	second_seats
+	(
+		seat INT(7) NOT NULL PRIMARY KEY,
+		line_id CHAR(5) NOT NULL,
+		status CHAR(5) DEFAULT '空' NOT NULL
+		
+	)
+;
+/*折り返しありの座席情報テーブルに値を挿入*/
+INSERT INTO
+	second_seats
+	(
+	seat,
+	line_id,
+	status
+	)
+VALUES
+	(1,'A','占'),
+	(2,'A','占'),
+	(3,'A','空'),
+	(4,'A','空'),
+	(5,'A','空'),
+	(6,'B','占'),
+	(7,'B','占'),
+	(8,'B','空'),
+	(9,'B','空'),
+	(10,'B','空'),
+	(11,'C','空'),
+	(12,'C','空'),
+	(13,'C','空'),
+	(14,'C','占'),
+	(15,'C','空')
+;

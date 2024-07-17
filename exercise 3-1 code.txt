@@ -1,11 +1,11 @@
 /*商品の重複組み合わせを表示*/
 SELECT
-	P1.name AS name_1,
-	P2.name AS name_2
+	p1.name AS first_name,
+	p2.name AS second_name
 FROM
-	Products P1
+	products p1
 INNER JOIN
-	Products P2
+	products p2
 ON
-	P1.name >= P2.name
+	p1.name >= p2.name
 ;

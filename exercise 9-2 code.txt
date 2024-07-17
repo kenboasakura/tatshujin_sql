@@ -1,34 +1,36 @@
+/*Oracle,UNIX,JavaÇÃ3éÌóﬁÇÃÇ›ÇàµÇ¶ÇÈãZèpé“ÇíTÇ∑*/
 SELECT DISTINCT
-	emp
+	employee
 FROM
-	EmpSkills AS ES1
+	employee_skills AS es1
 WHERE 
 	NOT EXISTS
 	(
 		SELECT
 			skill 
 		FROM
-			Skills
+			skills
 		EXCEPT
 		SELECT
 			skill
 		FROM
-			EmpSkills ES2
+			employee_skills AS es2
 		WHERE
-			ES1.emp = ES2.emp
+			es1.employee = es2.employee
 	)
-AND NOT EXISTS
+AND
+	NOT EXISTS
 	(
 		SELECT
 			skill
 		FROM
-			EmpSkills ES3
+			employee_skills es3
 		WHERE
-			ES1.emp = ES3.emp
+			es1.employee = es3.employee
 		EXCEPT
 		SELECT
 			skill 
 		FROM
-			Skills
+			skills
 	)
 ;
